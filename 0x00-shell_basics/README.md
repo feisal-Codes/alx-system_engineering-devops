@@ -1,1 +1,1 @@
-hosts the files of the current working directory
+hosts the files of the current directory
