@@ -1,0 +1,1 @@
+shell permission's script
