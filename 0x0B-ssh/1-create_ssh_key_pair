@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
-# create a pair of ssh where betty is the pswd
-# 4096 the bits to create
-ssh-keygen -f holberton -b 4096 -N betty
+# Bash script that creates a RSA key pair
+# Number of bits in the created key to be created 4096
+# Name of the created private key must be school
+# The created key must be protected by the passphrase betty
+
+ssh-keygen -b 4096 -f school -N betty
