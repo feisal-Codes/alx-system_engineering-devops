@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 # Displays informtation about subdomains.
-
-
 # variables & parameters
 
 subdomains=( "www" "lb-01" "web-01" "web-02" )
