@@ -1,27 +1,26 @@
 #!/usr/bin/python3
-'''
-Python script that, using this REST API, for a given employee ID
-'''
-import requests
-from sys import argv
+""" return info on employees """
 
 if __name__ == "__main__":
-    if len(argv) > 1:
-        user = argv[1]
-        url = "https://jsonplaceholder.typicode.com/"
-        req = requests.get("{}users/{}".format(url, user))
-        name = req.json().get("name")
-        if name is not None:
-            jreq = requests.get(
-                "{}todos?userId={}".format(
-                    url, user)).json()
-            alltsk = len(jreq)
-            completedtsk = []
-            for t in jreq:
-                if t.get("completed") is True:
-                    completedtsk.append(t)
-            count = len(completedtsk)
-            print("Employee {} is done with tasks({}/{}):"
-                  .format(name, count, alltsk))
-            for title in completedtsk:
-                print("\t {}".format(title.get("title")))
+    import requests
+    import sys
+
+    erequest = requests.get('https://jsonplaceholder.typicode.com/users/{}'
+                            .format(sys.argv[1]))
+
+    name = erequest.json().get('name')
+    trequests = requests.get('https://jsonplaceholder.typicode.com/todos')
+    tasks = trequests.json()
+    taskcompleted = 0
+    totaltasks = 0
+    tasklist = []
+    for taskcheck in tasks:
+        if taskcheck['userId'] == int(sys.argv[1]):
+            if taskcheck.get("completed"):
+                tasklist.append(taskcheck)
+                taskcompleted += 1
+            totaltasks += 1
+    print("Employee {} is done with tasks({}/{}):".format
+          (name, taskcompleted, totaltasks))
+    for completedtasks in tasklist:
+        print("\t {}".format(completedtasks.get("title")))
